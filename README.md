@@ -1,26 +1,28 @@
 # WhoAmMAI
 
-WhoAmMai is an LLM-powered guessing game where players ask short natural-language questions to uncover a hidden identity, then make a final guess when they think they know the answer.
+WhoAmMAI is an LLM-powered guessing game. Players ask short natural-language questions to uncover a hidden identity, then make a final guess when they think they know the answer.
 
-The system is designed around a lightweight web client and a serverless API. Instead of behaving like a general chatbot, it emphasizes structured LLM parsing, strict validation, and a tightly controlled gameplay loop.
+The project is built around a lightweight web client and a Cloudflare Worker API. The intended architecture emphasizes request validation, structured LLM parsing, and a tight gameplay loop rather than open-ended chatbot behavior.
 
 ## What The App Does
 
 - Presents a daily puzzle with fixed turn and length limits.
 - Accepts free-form player questions.
-- Uses structured LLM parsing to classify player intent before handling each turn.
-- Returns short, game-focused responses rather than open-ended chat.
+- Uses structured LLM parsing to classify player intent before the application decides how to handle a turn.
+- Returns short answers designed for a game loop rather than open-ended chat.
 
 ## Technical Highlights
 
-- Serverless API using Cloudflare Workers for low-ops deployment and edge-friendly latency.
-- LLM provider abstraction to allow model changes without rewriting application logic.
-- Structured JSON outputs to convert natural language into predictable, typed actions.
-- Validation at the API boundary with consistent, structured error responses.
+- Serverless API on Cloudflare Workers for low-ops deployment and edge-friendly latency.
+- LLM provider abstraction so model backends can change without rewriting the application flow.
+- Structured parsing output so the application can reason about player intent before answering.
+- Validation and standardized JSON error responses at the API boundary.
 - Clear separation between parsing, validation, and answer-generation responsibilities.
 
 ## Why This Project Exists
 
-This project explores how to turn LLM behavior into a structured, interactive product instead of a generic chatbot.
+This project explores how to turn LLM behavior into a tight interactive product instead of a generic chatbot. The goal is to build a game that feels playful and replayable while still keeping API behavior constrained, inspectable, and cheap enough for an MVP. A major focus is making natural-language input usable through structured parsing and validation instead of trusting raw model text alone.
 
-The goal is to build a game that feels playful and replayable while keeping API behavior constrained, inspectable, and cost-efficient for an MVP. A key focus is making natural-language input usable through structured parsing and validation rather than relying on raw model text alone.
+## Repository Scope
+
+The public repository is a curated portfolio slice, not a full mirror of the private working repo. It includes architecture docs and representative implementation examples chosen to show system design, API structure, validation, and typed LLM boundaries without exposing private prompts, secrets, or internal-only tooling.
